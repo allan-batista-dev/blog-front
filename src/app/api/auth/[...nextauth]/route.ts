@@ -30,9 +30,7 @@ export const authOptions: NextAuthOptions = {
           });
   
           const user = await res.json();
-  
-          console.log({ user });
-  
+
           if (res.ok && user) {
             return { ...user, access_token: user.access_token };
           } else return null;
@@ -50,7 +48,6 @@ export const authOptions: NextAuthOptions = {
       },
   
       async session({ session, token }) {
-      // Adicione o token de acesso ao objeto de usuário na sessão
       session.user = {
         ...session.user,
         access_token: token.accessToken as string,
