@@ -2,6 +2,8 @@ import Provider from '@/components/my/Provider'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { ThemeProvider } from "@/components/theme-provider"
+import MenuNavigation from '@/components/my/MenuNavigation'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,10 +18,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <Provider>
-          {children}
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <div className='container'>
+              <nav className='my-10'><MenuNavigation /></nav>
+              {children}
+            </div>
+          </ThemeProvider>
         </Provider>
       </body>
     </html>
