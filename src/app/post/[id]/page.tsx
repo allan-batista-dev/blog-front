@@ -7,12 +7,14 @@ import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Card } from "@/components/ui/card";
 import TimeLineComments from "@/components/my/TimeLineComments";
+import PostComments from "@/components/my/PostComment";
 
 export default function PostUnique() {
     const [data, setData] = useState<Post | null>(null);
     const pathname = usePathname();
     const parts = pathname?.split("/");
     const postID = parts?.[parts.length - 1];
+    const postIDAsNumber = parseInt(postID, 10);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -75,8 +77,18 @@ export default function PostUnique() {
                 <div className="my-10">
                     <Card className="py-10">
                         <h3 className="scroll-m-20 px-10  pb-2 mb-5 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-                            Comentarios:
+                            Comente sobre o post:
                         </h3>
+                        <div className="p-10">
+                            <PostComments idPost={postIDAsNumber}/>
+                        </div>
+                    </Card>
+                </div>
+                <div className="my-10">
+                    <Card className="py-10">
+                        <h4 className="scroll-m-20 px-10  pb-2 mb-5 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+                            Comentarios:
+                        </h4>
                         <TimeLineComments comments={data.comments || []} />
                     </Card>
                 </div>

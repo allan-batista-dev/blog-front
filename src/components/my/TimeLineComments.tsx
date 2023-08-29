@@ -10,6 +10,7 @@ import TimelineOppositeContent, {
 } from '@mui/lab/TimelineOppositeContent';
 import { Post } from '@/app/common/types/post.types';
 import { Card } from '../ui/card';
+import { useEffect, useState } from 'react';
 
 type Comment = {
     id: number;
@@ -20,12 +21,13 @@ type Comment = {
     postId: number;
 };
 
-type TimeLineCommentsProps = {
-    comments: Comment[];
-};
+export default function TimeLineComments({ comments }: { comments: Comment[] }) {
+    const [commentList, setCommentList] = useState<Comment[]>([]);
 
+    useEffect(() => {
+      setCommentList(comments);
+    }, [comments]);
 
-export default function TimeLineComments({ comments }: TimeLineCommentsProps) {
     return (
         <Timeline
             sx={{
