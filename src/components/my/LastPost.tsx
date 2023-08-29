@@ -34,6 +34,7 @@ export default function LastPost() {
 
   return (
     <section className="my-10">
+
       <div className="grid justify-center items-center grid-cols-2 gap-6">
         <div>
           <div>
@@ -46,17 +47,23 @@ export default function LastPost() {
             <p className="text-sm text-muted-foreground">
               {new Date(data.created_at).toLocaleString('pt-BR', { timeZone: 'UTC' })}
             </p>
-            <Button variant="link" className="p-0">Ver mais <ArrowBigRight /></Button>
+            <div className="mt-10">
+              <Link href={`/post/${data.id}`}>
+                <Button variant="link" className="p-0">Ver mais <ArrowBigRight /></Button>
+              </Link>
+            </div>
           </div>
         </div>
         <div className="flex justify-center">
-          <Image
-            src={`${process.env.NEXT_PUBLIC_SUPABASE}${data.file}`}
-            alt={data.title}
-            width={500}
-            height={500}
-            layout="responsive"
-          />
+          <Link href={`/post/${data.id}`}>
+            <Image
+              src={`${process.env.NEXT_PUBLIC_SUPABASE}${data.file}`}
+              alt={data.title}
+              width={500}
+              height={500}
+              layout="responsive"
+            />
+          </Link>
         </div>
       </div>
     </section>

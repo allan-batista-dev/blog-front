@@ -6,5 +6,15 @@ export type Post = {
     title: string;
     content: string;
     userId: number;
-    subtitle: string
+    subtitle: string;
+    comments?: [
+        {
+            id: number;
+            created_at: Date;
+            updated_at: Date;
+            text: string;
+            nameAuthor: string;
+            postId: number;
+        }
+    ];
 }
