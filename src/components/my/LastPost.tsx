@@ -46,7 +46,7 @@ export default function LastPost() {
               {data.subtitle}
             </p>
             <p className="text-sm text-muted-foreground">
-              {new Date(data.created_at).toLocaleString('pt-BR', { timeZone: 'UTC' })}
+              {new Date(data.created_at ?? '-').toLocaleString('pt-BR', { timeZone: 'UTC' })}
             </p>
             <div className="mt-10">
               <Link href={`/post/${data.id}`}>
@@ -59,7 +59,7 @@ export default function LastPost() {
           <Link href={`/post/${data.id}`}>
             <Image
               src={`${process.env.NEXT_PUBLIC_SUPABASE}${data.file}`}
-              alt={data.title}
+              alt={data.title ?? 'img-first-post'}
               width={500}
               height={500}
               layout="responsive"

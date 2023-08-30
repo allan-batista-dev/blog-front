@@ -1,19 +1,20 @@
 "use client";
-
 import { Post } from "@/app/common/types/post.types";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import api from "@/app/api/axios";
 import { useSession } from "next-auth/react";
 import FormPost from "../../components/FormPost";
+import { Input } from "@/components/ui/input";
 
 export default function EditPost() {
-    const [data, setData] = useState<Post | null>();
     const pathname = usePathname();
     const parts = pathname?.split("/");
     const postID = parts?.[parts.length - 1];
     const { data: session } = useSession();
     const token = session?.user?.access_token;
+
+    const [data, setData] = useState<Post | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,6 +27,12 @@ export default function EditPost() {
 
                 const responseData = await res.json();
                 setData(responseData);
+                setThreadID(responseData.threadId);
+                setTitle(responseData.title || "");
+                setSubtitle(responseData.subtitle || "");
+                setFile(responseData.file || "");
+                setContent(responseData.content || "");
+                setIsActive(responseData.isActive ?? false);
             } catch (error) {
                 console.error(error);
             }
@@ -34,12 +41,12 @@ export default function EditPost() {
         fetchData();
     }, [postID]);
 
-    const [threadId, setThreadID] = useState(data?.threadId);
-    const [title, setTitle] = useState(`${data?.title}`);
-    const [subtitle, setSubtitle] = useState(`${data?.subtitle}`);
-    const [file, setFile] = useState(`${data?.file}`);
-    const [content, setContent] = useState(`${data?.content}`);
-    const [isActive, setIsActive] = useState<boolean | undefined>(data?.isActive);
+    const [threadId, setThreadID] = useState<number | undefined>();
+    const [title, setTitle] = useState<string>('');
+    const [subtitle, setSubtitle] = useState<string>('');
+    const [file, setFile] = useState<string>('');
+    const [content, setContent] = useState<string>('');
+    const [isActive, setIsActive] = useState<boolean | undefined>();
 
     const registerEdit = async () => {
         try {
@@ -50,27 +57,32 @@ export default function EditPost() {
                 file,
                 title,
                 content
-            }
+            };
 
             const res = await api.patch('post', dataEdit, {
                 headers: { Authorization: `bearer ${token}` }
-            })
+            });
 
+            // Lógica de tratamento da resposta da API após a edição
         } catch (error) {
-            throw new Error(`error edit post ${error}`)
+            console.error(`Erro ao editar o post: ${error}`);
         }
     }
 
     return (
         <>
-            <FormPost
-                threadId={threadId ?? 0}
-                isActive={isActive === true ? true : false}
-                file={file}
-                title={title}
-                content={content}
-                subtitle={subtitle}
-            />
+            {data && (
+                <div>
+                    <FormPost
+                        threadId={data.threadId ?? 0}
+                        isActive={data.isActive ?? false}
+                        file={data.file}
+                        title={data.title || ""}
+                        content={data.content || ""}
+                        subtitle={data.subtitle || ""}
+                    />
+                </div>
+            )}
         </>
     )
 }
