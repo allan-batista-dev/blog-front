@@ -1,7 +1,7 @@
 "use client";
 
 import { ButtonTheme } from './ButtonTheme';
-import SigninButton from './SigninButton';
+import SigninButton from '../../app/(auth)/signin/SigninButton';
 import { Separator } from '../ui/separator';
 import { Button } from '../ui/button';
 import Link from 'next/link';
