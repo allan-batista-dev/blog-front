@@ -6,11 +6,10 @@ import {
     TabsList,
     TabsTrigger,
 } from "@/components/ui/tabs"
-import MyEditor from "@/app/admin/components/TextEdit";
 import { Card } from "@/components/ui/card";
 import LastPost from "@/components/my/LastPost";
 import { TableListPosts } from "./TableListPosts";
-import { List } from "lucide-react";
+import FormPost from "./FormPost";
 
 export function TabsNavigation() {
     return (
@@ -43,9 +42,7 @@ export function TabsNavigation() {
             </TabsContent>
             <TabsContent value="create-post">
                 <section className="my-10">
-                    <Card className="p-10">
-                        <MyEditor />
-                    </Card>
+                   {/* <FormPost dataPost={}/> */}
                 </section>
             </TabsContent>
 

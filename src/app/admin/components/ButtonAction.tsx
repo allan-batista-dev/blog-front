@@ -1,4 +1,5 @@
 "use client";
+import { Post } from "@/app/common/types/post.types";
 import {
   Menubar,
   MenubarContent,
@@ -7,8 +8,10 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar"
 import { MoreVertical } from "lucide-react";
+import Link from "next/link";
 
-export function ButtonAction() {
+export function ButtonAction({ id }: any) {
+
   return (
     <Menubar>
       <MenubarMenu  >
@@ -17,9 +20,9 @@ export function ButtonAction() {
         </MenubarTrigger>
         <MenubarContent>
           <MenubarItem>
-            Editar
+            <Link href={`admin/edit-post/${id}`}>Editar</Link>
           </MenubarItem>
-          <MenubarItem>
+          <MenubarItem className="cursor-pointer">
             Excluir
           </MenubarItem>
           <MenubarItem>

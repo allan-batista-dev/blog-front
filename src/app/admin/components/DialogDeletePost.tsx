@@ -10,7 +10,7 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
-export default function DialogDeletePost({ onClose }: any) {
+export default function DialogDeletePost() {
     return (
         <AlertDialog>
             <AlertDialogContent>
