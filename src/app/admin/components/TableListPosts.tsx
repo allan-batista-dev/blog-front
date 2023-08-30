@@ -9,6 +9,8 @@ import {
     TableRow,
   } from "@/components/ui/table"
 import { useEffect, useState } from "react";
+import { StatusSwitch } from "./StatusSwitch";
+import { ButtonAction } from "./ButtonAction";
   
   const invoices = [
     {
@@ -56,7 +58,7 @@ import { useEffect, useState } from "react";
   ]
   
   export function TableListPosts() {
-    const [data, setData] = useState<Post | null>(null);
+    const [data, setData] = useState<Post[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -67,8 +69,8 @@ import { useEffect, useState } from "react";
               throw new Error('Erro ao buscar posts')
             }
     
-            const responseData = await res.json();
-            setData(responseData);
+            const data = await res.json();
+            setData(data);
           } catch (error) {
             console.log(error);
           }
@@ -82,19 +84,25 @@ import { useEffect, useState } from "react";
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
+            <TableHead>ID publicação</TableHead>
+            <TableHead>Data publicação</TableHead>
+            <TableHead>Título</TableHead>
+            <TableHead>Ativo</TableHead>
+            <TableHead className="text-right">Ações</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+          {data.map((item) => (
+            <TableRow key={item.id}>
+              <TableCell>{item.id}</TableCell>
+              <TableCell className="font-medium">{new Date(item.created_at).toLocaleString('pt-BR', { timeZone: 'UTC' })}</TableCell>
+              <TableCell>{item.title}</TableCell>
+              <TableCell>
+                <StatusSwitch/>
+              </TableCell>
+              <TableCell className=" flex justify-end pe-0">
+                <ButtonAction/>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

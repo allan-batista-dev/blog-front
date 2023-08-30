@@ -33,7 +33,7 @@ export default function PostUnique() {
         };
 
         fetchData();
-    }, []);
+    });
 
     if (!data) {
         return <p>Carregando...</p>;
