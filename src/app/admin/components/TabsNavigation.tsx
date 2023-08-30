@@ -21,7 +21,7 @@ export function TabsNavigation() {
                 <TabsTrigger value="admin-threads">
                      Threads
                 </TabsTrigger>
-                <TabsTrigger value="my-posts">
+                <TabsTrigger value="create-post">
                     Nova postagem
                 </TabsTrigger>
             </TabsList>
@@ -42,7 +42,7 @@ export function TabsNavigation() {
             </TabsContent>
             <TabsContent value="create-post">
                 <section className="my-10">
-                   {/* <FormPost dataPost={}/> */}
+                   <FormPost />
                 </section>
             </TabsContent>
 

@@ -8,7 +8,7 @@ const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 
 export default function FormPost({
-    title, threadId, subtitle, file, isActive, content
+    title, threadId, subtitle, file, isActive, content, userId
 }: Post) {
     let toolbarOptions = [
         ['bold', 'italic'], ['link', 'image'],
@@ -31,18 +31,19 @@ export default function FormPost({
     }
     return (
         <>
-            <form>
-                <div className="mb-10">
-                    <Label className="mb-2 scroll-m-20 text-2xl font-semibold tracking-tight">Editar titulo</Label>
-                    <Input
-                        placeholder={title}
-                    />
-                </div>
-                <div>
-                    <Label className="mb-2 scroll-m-20 text-2xl font-semibold tracking-tight">Editar conteúdo</Label>
-                    <ReactQuill modules={module} theme="snow" value={content} />
-                </div>
-            </form>
+            <div className="mb-10">
+                <Label className="mb-2 scroll-m-20 text-2xl font-semibold tracking-tight">Título</Label>
+                <Input
+                    placeholder={title}
+                />
+            </div>
+            <div>
+
+            </div>
+            <div>
+                <Label className="mb-2 scroll-m-20 text-2xl font-semibold tracking-tight">Conteúdo</Label>
+                <ReactQuill modules={module} theme="snow" value={content} />
+            </div>
         </>
     )
 }

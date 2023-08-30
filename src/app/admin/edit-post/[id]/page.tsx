@@ -72,7 +72,7 @@ export default function EditPost() {
     return (
         <>
             {data && (
-                <div>
+                <form onSubmit={registerEdit}>
                     <FormPost
                         threadId={data.threadId ?? 0}
                         isActive={data.isActive ?? false}
@@ -81,7 +81,7 @@ export default function EditPost() {
                         content={data.content || ""}
                         subtitle={data.subtitle || ""}
                     />
-                </div>
+                </form>
             )}
         </>
     )

@@ -51,7 +51,7 @@ export function TableListPosts() {
           {data.map((item) => (
             <TableRow key={item.id}>
               <TableCell>{item.id}</TableCell>
-              <TableCell className="font-medium">{new Date(item.created_at).toLocaleString('pt-BR', { timeZone: 'UTC' })}</TableCell>
+              <TableCell className="font-medium">{new Date(item.created_at ?? '-').toLocaleString('pt-BR', { timeZone: 'UTC' })}</TableCell>
               <TableCell>{item.title}</TableCell>
               <TableCell>
                 <StatusSwitch />
