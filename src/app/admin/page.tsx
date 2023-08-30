@@ -1,7 +1,9 @@
+import { TabsNavigation } from "./components/TabsNavigation";
+
 export default function Admin() {
     return (
-        <h1>
-            admin
-        </h1>
+        <>
+           <TabsNavigation/>
+        </>
     )
 }

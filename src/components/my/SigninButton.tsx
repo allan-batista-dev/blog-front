@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { signOut } from "next-auth/react";
 import { ExitIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 
 export default function SigninButton() {
     const { data: session } = useSession()
@@ -35,6 +36,10 @@ export default function SigninButton() {
                             <DropdownMenuContent>
                                 <DropdownMenuLabel>
                                     {session?.user?.name}
+                                </DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuLabel>
+                                    <Link href={"/admin"}>Admin</Link>
                                 </DropdownMenuLabel>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuLabel onClick={handleSignOutClick} className="flex cursor-pointer items-center gap-2">

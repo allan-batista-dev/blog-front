@@ -14,7 +14,11 @@ export default function MenuNavigation() {
         <>
             <div className='grid grid-cols-3 justify-between items-center mb-10'>
                 <div>
-                    LOGO
+                    <Link href={"/"}>
+                        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-4xl">
+                            AllanDEV
+                        </h1>
+                    </Link>
                 </div>
                 <div className='flex items-center justify-center gap-6'>
                     <div>
