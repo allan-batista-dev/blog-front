@@ -39,7 +39,7 @@ export default function EditPost() {
     const [subtitle, setSubtitle] = useState(`${data?.subtitle}`);
     const [file, setFile] = useState(`${data?.file}`);
     const [content, setContent] = useState(`${data?.content}`);
-    const [isActive, setIsActive] = useState(data?.isActive);
+    const [isActive, setIsActive] = useState<boolean | undefined>(data?.isActive);
 
     const registerEdit = async () => {
         try {
@@ -63,7 +63,14 @@ export default function EditPost() {
 
     return (
         <>
-            <FormPost  />
+            <FormPost
+                threadId={threadId ?? 0}
+                isActive={isActive === true ? true : false}
+                file={file}
+                title={title}
+                content={content}
+                subtitle={subtitle}
+            />
         </>
     )
 }
