@@ -59,7 +59,8 @@ import { ButtonAction } from "./ButtonAction";
   
   export function TableListPosts() {
     const [data, setData] = useState<Post[]>([]);
-
+    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    
     useEffect(() => {
         const fetchData = async () => {
           try {
