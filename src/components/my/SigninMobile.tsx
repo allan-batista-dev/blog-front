@@ -1,16 +1,8 @@
 "use client";
 import { signIn, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { signOut } from "next-auth/react";
-import { LogInIcon, LogOut, Settings, SignalIcon } from "lucide-react";
-import Link from "next/link";
+import {  } from "next-auth/react";
+import { LogInIcon } from "lucide-react";
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
