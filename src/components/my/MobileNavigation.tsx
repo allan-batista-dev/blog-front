@@ -12,10 +12,11 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
-import { List, LogOut, Mail } from "lucide-react";
+import { Home, List, LogOut, Mail, Settings } from "lucide-react";
 import { Separator } from "../ui/separator";
 import SigninMobile from "./SigninMobile";
 import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
 
 export function MobileNavigation() {
     const { data: session } = useSession()
@@ -39,9 +40,22 @@ export function MobileNavigation() {
                             <SigninMobile />
                         </div>
                         <div>
-                            <Button className="w-full mb-5" variant={"outline"}>
-                                <Mail className="mr-2 h-4 w-4" /> Login with Email
-                            </Button>
+                            <Link href={'/'}>
+                                <Button className="w-full mb-5" variant={"outline"}>
+                                    <Home className="mr-2 h-4 w-4" /> Inicio
+                                </Button>
+                            </Link>
+                        </div>
+                        <div>
+                            {
+                                session && (
+                                    <Link href={'/admin'}>
+                                        <Button className="w-full mb-5" variant={"outline"}>
+                                            <Settings className="mr-2 h-4 w-4" /> Painel admin
+                                        </Button>
+                                    </Link>
+                                )
+                            }
                         </div>
                         {
                             session && (
