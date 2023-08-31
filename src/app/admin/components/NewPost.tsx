@@ -1,10 +1,7 @@
 "use client";
-import { Post } from "@/app/common/types/post.types";
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import {  useState } from "react";
 import api from "@/app/api/axios";
 import { useSession } from "next-auth/react";
-import { Input } from "@/components/ui/input";
 import FormPost from "./FormPost";
 
 export default function EditPost() {

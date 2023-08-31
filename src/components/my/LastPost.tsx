@@ -6,6 +6,7 @@ import { ArrowBigRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Post } from "@/app/common/types/post.types";
 import Link from "next/link";
+import notImage from '../../../public/not-image-post.png'
 
 export default function LastPost() {
   const [data, setData] = useState<Post | null>(null);
@@ -35,31 +36,29 @@ export default function LastPost() {
 
   return (
     <section className="my-10">
-
-      <div className="grid justify-center items-center grid-cols-2 gap-6">
+      <div className="grid justify-center items-center sm:grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <div>
-            <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+            <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
               {data.title}
-            </h2>
+            </h1>
             <p className="leading-7 [&:not(:first-child)]:mt-6 mb-6">
               {data.subtitle}
             </p>
             <p className="text-sm text-muted-foreground">
               {new Date(data.created_at ?? '-').toLocaleString('pt-BR', { timeZone: 'UTC' })}
             </p>
-            <div className="mt-10">
-              <Link href={`/post/${data.id}`}>
-                <Button variant="link" className="p-0">Ver mais <ArrowBigRight /></Button>
-              </Link>
-            </div>
           </div>
         </div>
-        <div className="flex justify-center">
+        <div>
           <Link href={`/post/${data.id}`}>
             <Image
-              src={`${process.env.NEXT_PUBLIC_SUPABASE}${data.file}`}
-              alt={data.title ?? 'img-first-post'}
+              src={
+                data.file
+                  ? `${process.env.NEXT_PUBLIC_SUPABASE}${data.file}`
+                  : notImage
+              }
+              alt="teste"
               width={500}
               height={500}
               layout="responsive"

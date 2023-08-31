@@ -53,7 +53,7 @@ export default function PostUnique() {
                     </div>
                     <div>
                         <small className="text-sm font-medium leading-none text-muted-foreground">
-                            Atualizado: {new Date(data.created_at).toLocaleString('pt-BR', { timeZone: 'UTC' })}
+                            Atualizado: {new Date(data.created_at ?? '-').toLocaleString('pt-BR', { timeZone: 'UTC' })}
                         </small>
                     </div>
                 </div>
@@ -61,7 +61,7 @@ export default function PostUnique() {
                 <div className="flex justify-center px-52 py-10">
                     <Image
                         src={`${process.env.NEXT_PUBLIC_SUPABASE}${data.file}`}
-                        alt={data.title}
+                        alt={data.title ?? 'alt-title'}
                         width={500}
                         height={500}
                         layout="responsive"
