@@ -12,10 +12,14 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
-import { List } from "lucide-react";
+import { List, Mail } from "lucide-react";
 import { Separator } from "../ui/separator";
+import { useSession } from "next-auth/react";
+import SigninButton from "@/app/(auth)/signin/SigninButton";
+import SigninMobile from "./SigninMobile";
 
 export function MobileNavigation() {
+    const { data: session } = useSession();
     return (
         <>
             <div className="mb-10">
@@ -25,32 +29,15 @@ export function MobileNavigation() {
                             <List />
                         </Button>
                     </SheetTrigger>
-                    <SheetContent>
-                        <SheetHeader>
-                            <SheetTitle>Edit profile</SheetTitle>
-                            <SheetDescription>
-                                Make changes to your profile here. Click save when you're done.
-                            </SheetDescription>
-                        </SheetHeader>
-                        <div className="grid gap-4 py-4">
-                            <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="name" className="text-right">
-                                    Name
-                                </Label>
-                                <Input id="name" value="Pedro Duarte" className="col-span-3" />
-                            </div>
-                            <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="username" className="text-right">
-                                    Username
-                                </Label>
-                                <Input id="username" value="@peduarte" className="col-span-3" />
-                            </div>
+                    <SheetContent className="py-16">
+                        <Separator />
+                        <div className="my-5">
+                            <SigninMobile />
                         </div>
-                        <SheetFooter>
-                            <SheetClose asChild>
-                                <Button type="submit">Save changes</Button>
-                            </SheetClose>
-                        </SheetFooter>
+                        <Button className="w-full mb-5" variant={"outline"}>
+                            <Mail className="mr-2 h-4 w-4" /> Login with Email
+                        </Button>
+                        <Separator />
                     </SheetContent>
                 </Sheet>
             </div>

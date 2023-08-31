@@ -1,6 +1,6 @@
 "use client";
 import { signIn, useSession } from "next-auth/react";
-import { Avatar, AvatarFallback, AvatarImage } from "../../../components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -9,7 +9,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { signOut } from "next-auth/react";
-import { LogOut, Settings, SignalIcon } from "lucide-react";
+import { LogInIcon, LogOut, Settings, SignalIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button"
 import {
@@ -26,7 +26,7 @@ import { Label } from "@/components/ui/label"
 import { FormEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function SigninButton() {
+export default function SigninMobile() {
     const { data: session } = useSession()
     const [email, setEmail] = useState('allanbatistadev@gmail.com');
     const [password, setPassword] = useState('Buddy2609');
@@ -50,45 +50,29 @@ export default function SigninButton() {
             setIsLoading(false);
         }
     };
-
-    function handleSignOutClick() {
-        signOut();
-    }
-    
     return (
         <div>
             {
                 session ? (
                     <div>
-                        <DropdownMenu>
-                            <DropdownMenuTrigger>
-                                <Avatar>
-                                    <AvatarImage src="https://github.com/shadcn.png" />
-                                    <AvatarFallback>AB</AvatarFallback>
-                                </Avatar>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent>
-                                <DropdownMenuLabel>
-                                    {session?.user?.name}
-                                </DropdownMenuLabel>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuLabel>
-                                    <Link className="flex items-center gap-2" href={"/admin"}>
-                                        <Settings /> Painel admin
-                                    </Link>
-                                </DropdownMenuLabel>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuLabel onClick={handleSignOutClick} className="flex cursor-pointer items-center gap-2">
-                                    <LogOut /> Sair
-                                </DropdownMenuLabel>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                        <div className="flex justify-center mb-3">
+                            <Avatar>
+                                <AvatarImage src="https://github.com/shadcn.png" />
+                                <AvatarFallback>AB</AvatarFallback>
+                            </Avatar>
+                        </div>
+                        <p className="text-center text-lg font-semibold">
+                            {session.user?.name}
+                        </p>
+                        <p className="text-sm text-muted-foreground text-center">
+                            {session.user?.email}
+                        </p>
                     </div>
-                ) : (
-                    <div>
+                ) :
+                    (
                         <Dialog>
                             <DialogTrigger asChild>
-                                <Button variant="outline">Painel Admin</Button>
+                                <Button className="w-full" variant="outline"><LogInIcon className="mr-2 h-4 w-4" />Acessar painel admin</Button>
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-[425px]">
                                 <DialogHeader>
@@ -139,9 +123,9 @@ export default function SigninButton() {
                                 </form>
                             </DialogContent>
                         </Dialog>
-                    </div>
-                )
+                    )
             }
         </div>
     )
 }
+
