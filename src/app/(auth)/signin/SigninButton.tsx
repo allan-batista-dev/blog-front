@@ -28,8 +28,8 @@ import { useRouter } from "next/navigation";
 
 export default function SigninButton() {
     const { data: session } = useSession()
-    const [email, setEmail] = useState('allanbatistadev@gmail.com');
-    const [password, setPassword] = useState('Buddy2609');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
