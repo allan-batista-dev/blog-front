@@ -1,5 +1,5 @@
 "use client";
-import { AlertCircle, ArrowBigDown, Check } from "lucide-react";
+import { AlertCircle, ArrowBigDown, Check, Loader2 } from "lucide-react";
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
@@ -9,21 +9,22 @@ import api from "@/app/api/axios";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 
 export default function AssNewsLatter() {
-    const [assNews, setAssNews] = useState('')
-    const [assSuccess, setAssSuccess] = useState(false)
+    const [assNews, setAssNews] = useState('');
+    const [assSuccess, setAssSuccess] = useState(false);
+    const [loaderBtn, setLoaderBtn] = useState(false);
 
     const register = async (e: FormEvent) => {
         e.preventDefault();
-
+        setLoaderBtn(true);
         try {
             const data = {
                 email: assNews
             }
-            const res = await api.post(`${process.env.NEXT_PUBLIC_API_URL}newsletter/ass-newsletter`, data)
+            const res = await api.post(`${process.env.NEXT_PUBLIC_API_URL}newsletter/ass-newsletter`, data);
 
-            setAssSuccess(true)
+            setAssSuccess(true);
         } catch (err) {
-            throw new Error(`error ${err}`)
+            throw new Error(`error ${err}`);
         }
     }
 
@@ -77,7 +78,13 @@ export default function AssNewsLatter() {
                                             </div>
                                             <div className="flex justify-center">
                                                 <Button type="submit" variant={"outline"}>
-                                                    Assinar
+                                                    {
+                                                        loaderBtn ? (
+                                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                                        ) : (
+                                                            <span>Assinar</span>
+                                                        )
+                                                    }
                                                 </Button>
                                             </div>
                                         </form>
