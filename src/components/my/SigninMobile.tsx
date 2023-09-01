@@ -21,7 +21,7 @@ import { useRouter } from "next/navigation";
 export default function SigninMobile() {
     const { data: session } = useSession()
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState(''Ï);
+    const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();

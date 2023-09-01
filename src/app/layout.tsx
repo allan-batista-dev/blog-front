@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import { ThemeProvider } from "@/components/theme-provider"
 import MenuNavigation from '@/components/my/MenuNavigation'
 import { MobileNavigation } from '@/components/my/MobileNavigation'
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -30,6 +31,7 @@ export default function RootLayout({
             </div>
           </ThemeProvider>
         </Provider>
+        <Analytics />
       </body>
     </html>
   )
