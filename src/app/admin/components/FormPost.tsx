@@ -29,16 +29,16 @@ export default function FormPost({
         [{ 'align': [] }],
         ['clean']
     ];
-    const module = {
+    const quillModules = {
         toolbar: toolbarOptions
     }
 
     const [selectedFile, setSelectedFile] = useState(null);
 
-    const handleFileChange = (event: any) => {
-        const file = event.target.files[0];
-        setSelectedFile(file);
-    };
+    // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     const file = event.target.files[0];
+    //     setSelectedFile(file);
+    // };
 
     const uploadFile = () => {
         if (selectedFile) {
@@ -50,8 +50,8 @@ export default function FormPost({
 
     return (
         <>
-            <div className="col-span-full">
-                <label htmlFor="photo" className="block text-sm font-medium leading-6 text-gray-900">
+            {/* <div className="col-span-full">
+                <label htmlFor="uploadFile" className="block text-sm font-medium leading-6 text-gray-900">
                     Photo
                 </label>
                 <input type="file" id="uploadFile" name="file" accept=".jpg, .jpeg, .png, .pdf" onChange={handleFileChange} />
@@ -65,7 +65,7 @@ export default function FormPost({
                         Adicionar capa
                     </Button>
                 </div>
-            </div>
+            </div> */}
             <div className="mb-10">
                 <Label className="mb-2 scroll-m-20 text-2xl font-semibold tracking-tight">Título</Label>
                 <Input
@@ -73,11 +73,8 @@ export default function FormPost({
                 />
             </div>
             <div>
-
-            </div>
-            <div>
                 <Label className="mb-2 scroll-m-20 text-2xl font-semibold tracking-tight">Conteúdo</Label>
-                <ReactQuill modules={module} theme="snow" value={content} />
+                <ReactQuill modules={quillModules} theme="snow" value={content} />
             </div>
         </>
     )
