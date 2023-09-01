@@ -13,19 +13,19 @@ import { Card } from '../ui/card';
 import { useEffect, useState } from 'react';
 
 type Comment = {
-    id: number;
-    created_at: Date;
-    updated_at: Date;
-    text: string;
-    nameAuthor: string;
-    postId: number;
+    id?: number;
+    created_at?: Date;
+    updated_at?: Date;
+    text?: string;
+    nameAuthor?: string;
+    postId?: number;
 };
 
 export default function TimeLineComments({ comments }: { comments: Comment[] }) {
     const [commentList, setCommentList] = useState<Comment[]>([]);
 
     useEffect(() => {
-      setCommentList(comments);
+        setCommentList(comments);
     }, [comments]);
 
     return (
@@ -39,8 +39,8 @@ export default function TimeLineComments({ comments }: { comments: Comment[] }) 
             {comments.map((comment, index) => (
                 <TimelineItem key={index}>
                     <TimelineOppositeContent>
-                        <p>Por: { comment.nameAuthor ? comment.nameAuthor : 'Anônimo'}</p>
-                        <small className='text-muted-foreground'>{new Date(comment.created_at).toLocaleString('pt-BR', { timeZone: 'UTC' })}</small>
+                        <p>Por: {comment.nameAuthor ? comment.nameAuthor : 'Anônimo'}</p>
+                        <small className='text-muted-foreground'>{comment.created_at ? new Date(comment.created_at).toLocaleString('pt-BR', { timeZone: 'UTC' }) : '-'}</small>
                     </TimelineOppositeContent>
                     <TimelineSeparator>
                         <TimelineDot />
