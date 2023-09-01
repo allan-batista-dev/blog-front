@@ -8,6 +8,7 @@ import notImage from '../../../public/not-image-post.png'
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 import { Separator } from "../ui/separator";
+import { Skeleton } from "../ui/skeleton";
 
 function paginate(array: any, page_size: any, page_number: any) {
     return array.slice((page_number - 1) * page_size, page_number * page_size);
@@ -25,12 +26,12 @@ export default function HomePosts() {
                     throw new Error("Erro ao buscar posts");
                 }
                 const data = await res.json();
-                
+
                 // Remove o primeiro post do array
                 if (data.length > 0) {
                     data.shift();
                 }
-                
+
                 setData(data);
             } catch (error) {
                 console.log(error);

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Post } from "@/app/common/types/post.types";
 import Link from "next/link";
 import notImage from '../../../public/not-image-post.png'
+import { Skeleton } from "../ui/skeleton";
 
 export default function LastPost() {
   const [data, setData] = useState<Post | null>(null);
@@ -31,7 +32,19 @@ export default function LastPost() {
   }, []);
 
   if (!data) {
-    return <p>Carregando...</p>;
+    return (
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-10 items-center my-10">
+        <div>
+          <Skeleton className="h-12 w-52 mb-8" />
+          <Skeleton className="h-5 w-auto mb-4" />
+          <Skeleton className="h-5 w-1/2 mb-10" />
+          <Skeleton className="h-3 w-1/4" />
+        </div>
+        <div>
+          <Skeleton className="h-72 w-auto" />
+        </div>
+      </div>
+    )
   }
 
   return (

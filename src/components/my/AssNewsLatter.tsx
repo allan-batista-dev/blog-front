@@ -50,7 +50,7 @@ export default function AssNewsLatter() {
                             Assine a Newsletter e fique por dentro de tudo
                         </h2>
                         <p className="leading-7 mb-5">
-                            Noticias sobre o mundo da tecnologia e atualizaões das nossa threads semanalmente
+                            Noticias sobre o mundo da tecnologia e atualizaões das nossas threads semanalmente
                         </p>
                     </div>
                     <div>
@@ -82,7 +82,7 @@ export default function AssNewsLatter() {
                                                         loaderBtn ? (
                                                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                                                         ) : (
-                                                            <span>Assinar</span>
+                                                            <span className="text-lg font-semibold">Assinar</span>
                                                         )
                                                     }
                                                 </Button>
