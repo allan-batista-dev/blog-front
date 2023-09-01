@@ -6,6 +6,7 @@ import api from "@/app/api/axios";
 import { useSession } from "next-auth/react";
 import FormPost from "../../components/FormPost";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export default function EditPost() {
     const pathname = usePathname();
@@ -63,7 +64,6 @@ export default function EditPost() {
                 headers: { Authorization: `bearer ${token}` }
             });
 
-            // Lógica de tratamento da resposta da API após a edição
         } catch (error) {
             console.error(`Erro ao editar o post: ${error}`);
         }
@@ -74,6 +74,7 @@ export default function EditPost() {
             {data && (
                 <form onSubmit={registerEdit}>
                     <FormPost
+                        userId={session?.user?.id}
                         threadId={data.threadId ?? 0}
                         isActive={data.isActive ?? false}
                         file={data.file}
@@ -81,6 +82,11 @@ export default function EditPost() {
                         content={data.content || ""}
                         subtitle={data.subtitle || ""}
                     />
+                    <div className="my-10">
+                        <Button className="w-full" variant={"outline"}>
+                            Salvar
+                        </Button>
+                    </div>
                 </form>
             )}
         </>

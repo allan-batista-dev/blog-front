@@ -1,10 +1,44 @@
 "use client";
-import { ArrowBigDown } from "lucide-react";
+import { AlertCircle, ArrowBigDown, Check } from "lucide-react";
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
+import { useSession } from "next-auth/react";
+import { ChangeEvent, FormEvent, useState } from "react";
+import api from "@/app/api/axios";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 
 export default function AssNewsLatter() {
+    const [assNews, setAssNews] = useState('')
+    const [assSuccess, setAssSuccess] = useState(false)
+
+    const register = async (e: FormEvent) => {
+        e.preventDefault();
+
+        try {
+            const data = {
+                email: assNews
+            }
+            const res = await api.post(`${process.env.NEXT_PUBLIC_API_URL}newsletter/ass-newsletter`, data)
+
+            setAssSuccess(true)
+        } catch (err) {
+            throw new Error(`error ${err}`)
+        }
+    }
+
+    const Success = () => {
+        return (
+            <Alert variant={`success`}>
+                <Check className="h-4 w-4" />
+                <AlertTitle>Sucesso</AlertTitle>
+                <AlertDescription>
+                    Obrigado por ter assinado nossa Newsletter.
+                </AlertDescription>
+            </Alert>
+        )
+    }
+
     return (
         <>
             <Separator />
@@ -19,17 +53,37 @@ export default function AssNewsLatter() {
                         </p>
                     </div>
                     <div>
-                        <div className="flex justify-center">
-                            <ArrowBigDown className="animate-bounce" />
-                        </div>
-                        <div className="mb-3"> 
-                            <Input placeholder="E-mail" />
-                        </div>
-                        <div className="flex justify-center">
-                            <Button variant={"outline"}>
-                                Assinar
-                            </Button>
-                        </div>
+
+                        {
+                            assSuccess ? (
+                                <Success />
+                            ) :
+                                (
+                                    <div>
+                                        <div className="flex justify-center">
+                                            <ArrowBigDown className="animate-bounce" />
+                                        </div>
+                                        <form onSubmit={register}>
+                                            <div className="mb-3">
+                                                <Input
+                                                    onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                                                        setAssNews(event.target.value)
+                                                    }
+                                                    value={assNews}
+                                                    type="email"
+                                                    required
+                                                    placeholder="E-mail"
+                                                />
+                                            </div>
+                                            <div className="flex justify-center">
+                                                <Button type="submit" variant={"outline"}>
+                                                    Assinar
+                                                </Button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                )
+                        }
                     </div>
                 </div>
             </section>
