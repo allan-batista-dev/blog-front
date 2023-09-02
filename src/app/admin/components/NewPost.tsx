@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import dynamic from "next/dynamic";
 import 'react-quill/dist/quill.snow.css';
+import LoadingForm from "@/components/my/LoadingForm";
+import { useRouter } from "next/navigation";
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
@@ -17,12 +19,13 @@ export default function NewPost() {
     const [threadId, setThreadID] = useState<number | undefined>();
     const [title, setTitle] = useState<string>('');
     const [subtitle, setSubtitle] = useState<string>('');
-
+    const [isLoading, setIsLoading] = useState(false)
     const [content, setContent] = useState<string>('');
     const currentUserId = session?.user?.id;
     const [userId, setUserId] = useState(currentUserId)
     const [file, setSelectedFile] = useState('');
     const [previewUrl, setPreviewUrl] = useState('');
+    const router = useRouter();
 
     const handleFileChange = (e: any) => {
         const file = e.target.files[0];
@@ -39,10 +42,10 @@ export default function NewPost() {
 
     const register = async (e: FormEvent) => {
         e.preventDefault()
+        setIsLoading(true)
 
         try {
             const formData = new FormData();
-            // formData.append("userId", Number(userId));
             formData.append("subtitle", subtitle);
             formData.append("file", file);
             formData.append("title", title);
@@ -53,7 +56,12 @@ export default function NewPost() {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            console.log('Resposta da API:', res.data);
+            setTitle('');
+            setSubtitle('');
+            setSelectedFile('')
+            setContent('')
+            router.push(`/post/${res.data.id}`)
+            setIsLoading(false)
         } catch (error) {
             console.error('Erro ao adicionar post o post:', error);
         }
@@ -62,6 +70,13 @@ export default function NewPost() {
     return (
         <>
             <div>
+                {
+                    isLoading && (
+                        <div className="my-auto">
+                            <LoadingForm />
+                        </div>
+                    )
+                }
                 <form onSubmit={register}>
                     <div className="mb-10">
                         <Label className="mb-2 scroll-m-20 text-2xl font-semibold tracking-tight">Capa</Label>
