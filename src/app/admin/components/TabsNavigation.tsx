@@ -10,6 +10,7 @@ import { Card } from "@/components/ui/card";
 import LastPost from "@/components/my/LastPost";
 import { TableListPosts } from "./TableListPosts";
 import FormPost from "./FormPost";
+import NewPost from "./NewPost";
 
 export function TabsNavigation() {
     return (
@@ -42,7 +43,7 @@ export function TabsNavigation() {
             </TabsContent>
             <TabsContent value="create-post">
                 <section className="my-10">
-                   <FormPost />
+                   <NewPost />
                 </section>
             </TabsContent>
 

@@ -81,6 +81,11 @@ export default function EditPost() {
                         title={data.title || ""}
                         content={data.content || ""}
                         subtitle={data.subtitle || ""}
+                        onTitleChange={setTitle}
+                        onSubtitleChange={setSubtitle}
+                        onFileChange={setFile}
+                        onContentChange={setContent}
+
                     />
                     <div className="my-10">
                         <Button className="w-full" variant={"outline"}>
