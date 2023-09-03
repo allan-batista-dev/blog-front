@@ -38,6 +38,22 @@ export default function PostUnique() {
     if (!data) {
         return <p>Carregando...</p>;
     }
+
+    function createTrustedHTML(htmlString: any) {
+        const parser = new DOMParser();
+        const parsedHTML = parser.parseFromString(htmlString, 'text/html');
+
+        if (!parsedHTML || !parsedHTML.body) {
+            return { __html: '' };
+        }
+
+        const trustedHTML = new XMLSerializer().serializeToString(parsedHTML);
+
+        return { __html: trustedHTML };
+    }
+
+    const sanitizedHTML = data.content;
+
     return (
         <>
             <section className="my-10">
@@ -70,7 +86,7 @@ export default function PostUnique() {
                 <div className="my-10">
                     <Card>
                         <div className="p-10">
-                            {data.content}
+                            <div dangerouslySetInnerHTML={createTrustedHTML(sanitizedHTML)} />
                         </div>
                     </Card>
                 </div>
@@ -80,7 +96,7 @@ export default function PostUnique() {
                             Comente sobre o post:
                         </h3>
                         <div className="p-10">
-                            <PostComments idPost={postIDAsNumber}/>
+                            <PostComments idPost={postIDAsNumber} />
                         </div>
                     </Card>
                 </div>
